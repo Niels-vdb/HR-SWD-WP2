@@ -1,0 +1,60 @@
+{% extends 'base.html' %} {% block content %}
+
+<div class="exeption-screen">
+  <table id="exception-table">
+    <thead>
+      <th>UID</th>
+      <th>Leerdoel</th>
+      <th>Auteur</th>
+      <th>Vraag</th>
+      <th>Uitgezonderd door</th>
+      <th>Geen uitzondering</th>
+    </thead>
+    {% for exception in quark.exceptions %}
+    <tr>
+      <td>
+        <p>{{ exception["id"] }}</p>
+      </td>
+      <td>
+        <p>
+          {% if exception["leerdoel"] > quark.single_leerdoel | length %}
+          Onbekend {% else %} {% for leerdoel in
+          quark.single_leerdoel[exception["leerdoel"] - 1] %} {{ leerdoel }} {%
+          endfor %} {% endif %}
+        </p>
+      </td>
+      <td>
+        <p>
+          {% if exception["auteur"] > quark.single_author | length %} Onbekend
+          {% else %} {% for author in quark.single_author[exception["auteur"] -
+          1] %} {{ author }} {% endfor %} {% endif %}
+        </p>
+      </td>
+      <td>
+        <p>{{ exception["vraag"] }}</p>
+      </td>
+      <td>
+        <p>
+          {% if not exception["exceptionBy"] %} NVT {% else %} {{
+          exception["exceptionBy"] }} {% endif %}
+        </p>
+      </td>
+      <td>
+        <form
+          action="/restore_question_exception/{{ exception.id }}"
+          method="POST"
+        >
+          <input
+            type="image"
+            src="../static/images/restore.png"
+            alt=""
+            class="delete-btn"
+          />
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
+</div>
+
+{% include 'backbutton.html' %} {% endblock %}

@@ -1,0 +1,45 @@
+{% extends 'base.html' %} {% block content %}
+
+<div class="menu-screen">
+  <div class="heading">
+    <h1 id="greeting" class="menu-greeting">{{ session["name"] }}</h1>
+    <h2 class="menu-heading">Waar wilt u vandaag aan werken?</h2>
+  </div>
+  <div class="grid-menu">
+    <a class="box box1 btn btn-success" href="{{ url_for('edit_questions') }}">
+      <p>Vragen aanpassen</p>
+    </a>
+    <a class="box box2 btn btn-primary" href="{{ url_for('edit_authors') }}">
+      <p>Auteurs aanpassen</p>
+    </a>
+    <a
+      class="box box3 btn btn-primary"
+      href="{{ url_for('question_exceptions') }}"
+    >
+      <p>Vragen met uitzondering</p>
+    </a>
+    <a
+      class="box box4 btn btn-success"
+      href="{{ url_for('author_exceptions') }}"
+    >
+      <p>Auteurs met uitzondering</p>
+    </a>
+    <a class="box box5 btn btn-success" href="{{ url_for('filter') }}">
+      <p>Database filteren</p>
+      <!-- <p>Database filteren naar een Exel bestand</p> -->
+    </a>
+    {% if session["admin"] %}
+    <a class="box box7 btn btn-primary" href="{{ url_for('new_user') }}">
+      <p>Nieuwe gebruiker toevoegen</p>
+    </a>
+    <a class="box box8 btn btn-success" href="{{ url_for('see_users') }}">
+      <p>Bekijk gebruikers</p>
+    </a>
+    {% endif %}
+  </div>
+</div>
+
+<script src="../static/js/menu_time.js"></script>
+<script src="../static/js/navbar_dropdown.js"></script>
+
+{% endblock %}

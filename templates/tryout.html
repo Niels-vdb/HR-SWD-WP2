@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../static/css/style.css" />
+    <script
+      type="text/javascript"
+      src="../table-to-excel-master/dist/tableToExcel.js"
+    ></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="filtered-screen">
+      <section class="filtered-data-table">
+        <table id="filtered-table">
+          <thead>
+            <th>UID</th>
+            <th>Leerdoel</th>
+            <th>Auteur</th>
+            <th>Vraag</th>
+          </thead>
+          {#
+          <!-- {% for question in questions %} -->
+          <!-- <tr>
+            <td>
+              <p>{{ question["id"] }}</p>
+            </td>
+            <td>
+              <p>{{ question["leerdoel"] }}</p>
+            </td>
+            <td>
+              <p>{{ question["auteur"] }}</p>
+            </td>
+            <td>
+              <p>{{ question["vraag"] }}</p>
+            </td>
+          </tr> -->
+          #}
+          <tr>
+            <td>
+              <p>question</p>
+            </td>
+            <td>
+              <p>question</p>
+            </td>
+            <td>
+              <p>question</p>
+            </td>
+            <td>
+              <p>question</p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p>question</p>
+            </td>
+            <td>
+              <p>question</p>
+            </td>
+            <td>
+              <p>question</p>
+            </td>
+            <td>
+              <p>question</p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p>question</p>
+            </td>
+            <td>
+              <p>question</p>
+            </td>
+            <td>
+              <p>question</p>
+            </td>
+            <td>
+              <p>question</p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p>question</p>
+            </td>
+            <td>
+              <p>question</p>
+            </td>
+            <td>
+              <p>question</p>
+            </td>
+            <td>
+              <p>question</p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p>question</p>
+            </td>
+            <td>
+              <p>question</p>
+            </td>
+            <td>
+              <p>question</p>
+            </td>
+            <td>
+              <p>question</p>
+            </td>
+          </tr>
+          {#<!-- {% endfor %} -->#}
+        </table>
+      </section>
+
+      <div class="filter-btns">
+        <button
+          type="button"
+          onclick="exportTableToExcel()"
+          class="btn btn-success"
+        >
+          Omzetten naar Exel
+        </button>
+        <a href="{{ url_for('filter') }}"
+          ><button type="button" class="btn btn-primary">
+            Terug naar filter
+          </button></a
+        >
+      </div>
+    </div>
+
+    <script>
+      function exportTableToExcel() {
+        const table = document.getElementById("filtered-table");
+        TableToExcel.convert(table);
+        // TableToExcel.convert(document.getElementById("filtered-table"));
+      }
+    </script>
+  </body>
+</html>

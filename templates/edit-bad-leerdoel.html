@@ -1,0 +1,64 @@
+<section class="edit-screen">
+  <table class="edit-table">
+    <thead>
+      <th>UID</th>
+      <th>Auteur</th>
+      <th>Vraag</th>
+    </thead>
+    {% for question in quark.leerdoel_questions %}
+    <tr>
+      <td class="edit-question-id">
+        <a
+          class="btn btn-primary"
+          href="https://www.test-correct.nl/?vraag={{ question['id'] }}"
+          >{{ question["id"] }}</a
+        >
+      </td>
+      <td class="edit-question-author">
+        {% if question["auteur"] > quark.authors | length %} Onbekend {% else %}
+        {% for author in quark.single_author[question["auteur"] - 1] %} {{
+        author | capitalize }} {% endfor %} {% endif %}
+      </td>
+      <td class="edit-table-c-2">
+        <p>{{ question["vraag"] }}</p>
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
+
+  {% if quark.leerdoel_questions | length > 0 %}
+  <section class="container-fluid leerdoel-container">
+    <p><strong>Leerdoelen</strong></p>
+    <form
+      action="/save_leerdoel/{{ quark.leerdoel_questions[0].id }}"
+      method="POST"
+    >
+      <select
+        class="form-select edit-select"
+        name="leerdoel"
+        id="leerdoel"
+        size="5"
+        aria-label="size 3 select example"
+      >
+        {% for leerdoel in quark.leerdoelen %}
+        <option class="leerdoel-options" value="{{ leerdoel['id'] }}">
+          {{ leerdoel["leerdoel"].capitalize() }}
+        </option>
+        {% endfor %}
+      </select>
+      <input type="submit" class="btn btn-success edit-btn" value="Wijzigen" />
+    </form>
+    <!-- <input type="submit" class="btn btn-warning" value="Overslaan"> -->
+    <form
+      action="/leerdoel_exception/{{ quark.leerdoel_questions[0].id }}"
+      method="POST"
+    >
+      <input
+        type="submit"
+        class="btn btn-warning edit-btn"
+        value="Uitzondering"
+      />
+    </form>
+  </section>
+  {% endif %}
+</section>

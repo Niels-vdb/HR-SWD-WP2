@@ -1,0 +1,48 @@
+{% extends 'base.html' %} {% block content %} {% if quark["author_trigger"] %}
+<div style="display: none" id="edit-leerdoel-screen">
+  {% include 'edit-bad-leerdoel.html' %}
+</div>
+<div style="display: block" id="edit-author-screen">
+  {% include 'edit-bad-author.html' %}
+</div>
+<div style="display: none" id="edit-sys-code-screen">
+  {% include 'edit-bad-sys-code.html' %}
+</div>
+
+{% elif quark.question_trigger %}
+<div style="display: none" id="edit-leerdoel-screen">
+  {% include 'edit-bad-leerdoel.html' %}
+</div>
+<div style="display: none" id="edit-author-screen">
+  {% include 'edit-bad-author.html' %}
+</div>
+<div style="display: block" id="edit-sys-code-screen">
+  {% include 'edit-bad-sys-code.html' %}
+</div>
+
+{% else %}
+<div style="display: block" id="edit-leerdoel-screen">
+  {% include 'edit-bad-leerdoel.html' %}
+</div>
+<div style="display: none" id="edit-author-screen">
+  {% include 'edit-bad-author.html' %}
+</div>
+<div style="display: none" id="edit-sys-code-screen">
+  {% include 'edit-bad-sys-code.html' %}
+</div>
+{% endif %}
+
+<div class="container-fluid edit-question-btns">
+  <button id="switch-1" class="switch-btn btn btn-primary">
+    Systeem en HTML codes verwijderen
+  </button>
+  <button id="switch-2" class="switch-btn btn btn-primary">
+    Onjuiste leerdoelen veranderen
+  </button>
+  <button id="switch-3" class="switch-btn btn btn-primary">
+    Onjuiste auteurs veranderen
+  </button>
+</div>
+
+<script src="../static/js/question_toggle.js"></script>
+{% include 'backbutton.html' %} {% endblock %}

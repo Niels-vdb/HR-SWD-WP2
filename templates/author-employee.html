@@ -1,0 +1,73 @@
+<table class="container-fluid edit-author-table">
+  <thead>
+    <th>ID</th>
+    <th>Naam</th>
+    <th>Geboortejaar</th>
+    <th>Medewerker</th>
+    <th>Pension</th>
+  </thead>
+  {% for author in quark.employee_authors %}
+  <tr>
+    <td>
+      <p>{{ author["id"] }}</p>
+    </td>
+    <td>
+      <p>{{ author["voornaam"] }} {{ author["achternaam"] }}</p>
+    </td>
+    <td>
+      <p>{{ author["geboortejaar"] }}</p>
+    </td>
+    <td>
+      <p>{{ author["medewerker"] }}</p>
+    </td>
+    <td>
+      <p>
+        {% if author["met pensioen"] == 1 %} Met pensioen {% endif %} {% if
+        author["met pensioen"] != 1 %} NVT {% endif %}
+      </p>
+    </td>
+  </tr>
+
+  {% endfor %}
+</table>
+
+{% if quark.employee_authors | length > 0 %}
+<section class="edit-author-btns">
+  <!-- Saves employee -->
+  <form
+    action="/save_employee/{{ quark.employee_authors[0].id }}"
+    method="POST"
+  >
+    <input type="hidden" name="edit-bad-employee" value="True" />
+    <input
+      value="Wel werknemer"
+      type="submit"
+      class="btn btn-success author-btn"
+    />
+  </form>
+  <!-- Saves non employee -->
+  <form
+    action="/save_non_employee/{{ quark.employee_authors[0].id }}"
+    method="POST"
+  >
+    <input type="hidden" name="edit-bad-employee" value="True" />
+    <input
+      value="Geen werknemer"
+      type="submit"
+      class="btn btn-danger author-btn"
+    />
+  </form>
+  <!-- Makes employee exception -->
+  <form
+    action="/employee_exception/{{ quark.employee_authors[0].id }}"
+    method="POST"
+  >
+    <input type="hidden" name="edit-bad-employee" value="True" />
+    <input
+      value="Uitzondering"
+      type="submit"
+      class="btn btn-warning author-btn"
+    />
+  </form>
+</section>
+{% endif %}

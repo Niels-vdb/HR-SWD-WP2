@@ -1,0 +1,33 @@
+{% extends 'base.html' %} {% block content %}
+
+<section class="container-fluid edit-author-screen">
+  {% if quark.employee_trigger %}
+  <section style="display: block" id="employee-screen">
+    {% include 'author-employee.html' %}
+  </section>
+  <section style="display: none" id="birth-year-screen">
+    {% include 'author-birth-year.html' %}
+  </section>
+
+  {% else %}
+  <section style="display: none" id="employee-screen">
+    {% include 'author-employee.html' %}
+  </section>
+  <section style="display: block" id="birth-year-screen">
+    {% include 'author-birth-year.html' %}
+  </section>
+  {% endif %}
+</section>
+
+<div id="switch" class="container-fluid edit-question-btns">
+  <button id="switch-4" class="switch-btn btn btn-primary">
+    Auteurs met foute geboortejaar
+  </button>
+  <button id="switch-5" class="switch-btn btn btn-primary">
+    Auteurs met foute medewerker input
+  </button>
+</div>
+
+<script src="../static/js/author_toggle.js"></script>
+
+{% include 'backbutton.html' %} {% endblock %}

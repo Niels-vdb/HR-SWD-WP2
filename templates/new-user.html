@@ -1,0 +1,56 @@
+{% extends 'base.html' %} {% block content %}
+<section class="new-user-screen">
+  <div class="new-user-form">
+    <form action="/create_new_user" method="POST">
+      {% for message in get_flashed_messages() %}
+      <p class="flash-message">{{ message }}</p>
+      {% endfor %}
+      <label for="new_user_fn" class="form-label">Voornaam</label>
+      <input
+        type="text"
+        class="form-control"
+        name="first-name"
+        id="new_user_fn"
+      />
+      <label for="new_user_infix" class="form-label">Tussenvoegsel</label>
+      <input
+        type="text"
+        class="form-control"
+        name="infix"
+        id="new_user_infix"
+      />
+      <label for="new_user_ln" class="form-label">Achternaam</label>
+      <input
+        type="text"
+        class="form-control"
+        name="last-name"
+        id="new_user_ln"
+      />
+      <label for="new_user_email" class="form-label">Email address</label>
+      <input
+        type="email"
+        class="form-control"
+        name="email"
+        id="new_user_email"
+      />
+      <label for="new_user_password" class="form-label">Wachtwoord</label>
+      <input
+        type="password"
+        class="form-control new-user-password"
+        name="password"
+        id="new_user_password"
+      />
+      <br />
+      <input type="checkbox" name="admin" id="admin" class="admin_checkbox" />
+      <label for="admin">Admin</label>
+      <br />
+      <input
+        type="submit"
+        class="btn btn-primary new-user-btn"
+        value="Voeg gebruiker toe"
+      />
+    </form>
+  </div>
+</section>
+
+{% include 'backbutton.html' %} {% endblock %}

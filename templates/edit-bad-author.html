@@ -1,0 +1,69 @@
+<section class="edit-screen">
+  <table class="edit-table">
+    <thead>
+      <th>UID</th>
+      <th>Leerdoel</th>
+      <th>Vraag</th>
+    </thead>
+    {% for question in quark.author_questions %}
+    <tr>
+      <td class="edit-question-id">
+        <a
+          class="btn btn-primary"
+          href="https://www.test-correct.nl/?vraag={{ question['id'] }}"
+          >{{ question["id"] }}</a
+        >
+      </td>
+      <td class="edit-question-leerdoel">
+        {% if question["leerdoel"] > quark.leerdoelen | length %} Onbekend {%
+        else %} {% for leerdoel in quark.single_leerdoel[question["leerdoel"] -
+        1] %} {{ leerdoel | capitalize }} {% endfor %} {% endif %}
+      </td>
+      <td class="edit-table-c-2">
+        <p>{{ question["vraag"] }}</p>
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
+
+  <section class="container-fluid author-container">
+    <p><strong>Auteurs</strong></p>
+    <!-- Saves new author -->
+    {% if quark.author_questions | length > 0 %}
+    <form
+      action="/save_author/{{ quark.author_questions[0].id }}"
+      ,
+      method="POST"
+    >
+      <input type="hidden" name="edit-bad-authors" value="True" />
+      <select
+        class="form-select edit-select"
+        name="author"
+        id="author"
+        size="5"
+        aria-label="size 3 select example"
+      >
+        {% for author in quark.authors %}
+        <option class="author-options" value="{{ author['id'] }}">
+          {{ author["voornaam"].capitalize() }} {{
+          author["achternaam"].capitalize() }}
+        </option>
+        {% endfor %}
+      </select>
+      <input type="submit" class="btn btn-success edit-btn" value="Wijzigen" />
+    </form>
+    <!-- Makes bad author exception -->
+    <form
+      action="/author_exception/{{ quark.author_questions[0].id }}"
+      method="POST"
+    >
+      <input type="hidden" name="edit-bad-authors" value="True" />
+      <input
+        type="submit"
+        class="btn btn-warning edit-btn"
+        value="Uitzondering"
+      />
+    </form>
+    {% endif %}
+  </section>
+</section>

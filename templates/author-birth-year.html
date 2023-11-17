@@ -1,0 +1,68 @@
+<table class="container-fluid edit-author-table">
+  <thead>
+    <th>ID</th>
+    <th>Naam</th>
+    <th>Geboortejaar</th>
+    <th>Medewerker</th>
+    <th>Pension</th>
+  </thead>
+  {% for author in quark.birth_year_authors %}
+  <tr>
+    <td>
+      <p>{{ author["id"] }}</p>
+    </td>
+    <td>
+      <p>{{ author["voornaam"] }} {{ author["achternaam"] }}</p>
+    </td>
+    <td>
+      <p>{{ author["geboortejaar"] }}</p>
+    </td>
+    <td>
+      <p>
+        {% if author["medewerker"] == 1 %} Geen medewerker Test Correct {% endif
+        %} {% if author["medewerker"] != 1 %} Medewerker Test Correct {% endif
+        %}
+      </p>
+    </td>
+    <td>
+      <p>
+        {% if author["met pensioen"] == 1 %} Met pensioen {% endif %} {% if
+        author["met pensioen"] != 1 %} NVT {% endif %}
+      </p>
+    </td>
+  </tr>
+
+  {% endfor %}
+</table>
+{% if quark.birth_year_authors | length > 0 %}
+<section class="edit-author-btns">
+  <form
+    action="save_new_birth_year/{{ quark.birth_year_authors[0].id }}"
+    method="post"
+    class="birth-year-input"
+  >
+    <input
+      type="number"
+      name="new-birth-year"
+      class="new-birth-year"
+      min="1950"
+      max="2020"
+    />
+    <input
+      value="Geboorte jaar opslaan"
+      type="submit"
+      class="btn btn-success author-btn"
+    />
+  </form>
+  <form
+    action="/birth_year_exception/{{ quark.birth_year_authors[0].id }}"
+    method="post"
+  >
+    <input
+      value="Uitzondering"
+      type="submit"
+      class="btn btn-warning author-btn"
+    />
+  </form>
+</section>
+{% endif %}

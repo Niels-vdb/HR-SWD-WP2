@@ -1,0 +1,59 @@
+{% extends 'base.html' %} {% block content %}
+
+<div class="exeption-screen">
+  <table id="exception-table">
+    <thead>
+      <th>UID</th>
+      <th>Naam</th>
+      <th>Geboortejaar</th>
+      <th>Medewerker</th>
+      <th>Pensioen</th>
+      <th>Uitgezonderd door</th>
+      <th>Geen uitzondering</th>
+    </thead>
+    {% for author in quark.exceptions %}
+    <tr>
+      <td>
+        <p>{{ author["id"] }}</p>
+      </td>
+      <td>
+        <p>{{ author["voornaam"] }} {{ author["achternaam"] }}</p>
+      </td>
+      <td>
+        <p>{{ author["geboortejaar"] }}</p>
+      </td>
+      <td>
+        <p>
+          {% if author["medewerker"] == 1 %} Medewerker Test Correct {% endif %}
+          {% if author["medewerker"] != 1 %} Geen medewerker Test Correct {%
+          endif %}
+        </p>
+      </td>
+      <td>
+        <p>
+          {% if author["met pensioen"] == 1 %} Met pensioen {% endif %} {% if
+          author["met pensioen"] != 1 %} NVT {% endif %}
+        </p>
+        <td>
+          <p>
+            {% if not author["exceptionBy"] %} NVT {% else %} {{
+            author["exceptionBy"] }} {% endif %}
+          </p>
+        </td>
+      </td>
+      <td>
+        <form action="/restore_author_exception/{{ author.id }}" method="POST">
+          <input
+            type="image"
+            src="../static/images/restore.png"
+            alt=""
+            class="delete-btn"
+          />
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
+</div>
+
+{% include 'backbutton.html' %} {% endblock %}

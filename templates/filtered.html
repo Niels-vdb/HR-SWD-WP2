@@ -1,0 +1,81 @@
+{% extends 'base.html' %} {% block content %}
+<div class="filtered-screen">
+  <section class="filtered-data-table">
+    <table id="filtered-table">
+      <thead>
+        <th>UID</th>
+        <th>Leerdoel</th>
+        <th>Auteur</th>
+        <th>Vraag</th>
+        <th>Gewijzigd door</th>
+        <th>Uitgezonderd door</th>
+      </thead>
+      {% for question in quark.filtered %}
+      <tr>
+        <td>
+          <a
+            class="btn btn-primary"
+            href="https://www.test-correct.nl/?vraag={{ question['id'] }}"
+            >{{ question["id"] }}</a
+          >
+        </td>
+        <td>
+          <p>
+            {% if question["leerdoel"] %} {% if question["leerdoel"] >
+            quark.single_leerdoel | length %} Onbekend {% else %} {% for
+            leerdoel in quark.single_leerdoel[question["leerdoel"] - 1] %} {{
+            leerdoel }} {% endfor %} {% endif %} {% else %} {{
+            question["leerdoel"] }} {% endif %}
+          </p>
+        </td>
+        <td>
+          <p>
+            {% if question["auteur"] %} {% if question["auteur"] >
+            quark.single_author | length %} Onbekend {% else %} {% for author in
+            quark.single_author[question["auteur"] - 1] %} {{ author }} {%
+            endfor %} {% endif %} {% else %} {{ question["auteur"] }} {% endif
+            %}
+          </p>
+        </td>
+        <td>
+          <p>{{ question["vraag"] }}</p>
+        </td>
+        <td>
+          <p>
+            {% if not question["changedBy"] %} NVT {% else %} {% for user in
+            quark.single_user[question["changedBy"]] %} {{ user }} {% endfor %}
+            {% endif %}
+          </p>
+        </td>
+        <td>
+          <p>
+            {% if not question["exceptionBy"] %} NVT {% else %} {% for user in
+            quark.single_user[question["changedBy"]] %} {{ user }} {% endfor %}
+            {% endif %}
+          </p>
+        </td>
+      </tr>
+
+      {% endfor %}
+    </table>
+  </section>
+
+  <div class="filter-btns">
+    <!-- <input
+      type="submit"
+      value="Omzetten naar Excel"
+      class="btn btn-success filtered-btn"
+      id="convert-excel-btn"
+    /> -->
+    <!-- <button type="button" class="btn btn-success filtered-btn" id="convert-excel-btn">
+      Omzetten naar Excel
+    </button> -->
+    <a href="{{ url_for('filter') }}"
+      ><button type="button" class="btn btn-primary filtered-btn">
+        Terug naar filter
+      </button></a
+    >
+  </div>
+</div>
+
+{% include 'backbutton.html' %} {% endblock %}

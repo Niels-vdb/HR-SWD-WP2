@@ -1,0 +1,248 @@
+{% extends 'base.html' %} {% block content %}
+<div class="filter-screen">
+  <div class="filters-box">
+    <form action="/filtered_data" method="POST">
+      <ul class="list-group">
+        <li class="list-group-item">
+          <strong>Filter op vragen database</strong>
+        </li>
+
+        <!-- Filter for uid -->
+        <li class="list-group-item">
+          <input
+            class="form-check-input me-1"
+            type="radio"
+            value="uid-radio"
+            name="filter-radio"
+          />
+          Filter van UID
+          <input type="number" name="uid-min" class="uid-input" min="0" />
+          tot
+          <input type="number" name="uid-max" class="uid-input" min="0" />
+        </li>
+
+        <!-- filter for leerdoel -->
+        <li class="list-group-item">
+          <input
+            class="form-check-input me-1"
+            type="radio"
+            value="leerdoel-radio"
+            name="filter-radio"
+          />
+          Vragen met leerdoel
+          <select name="filter-radio" id="leerdoel-filter">
+            {% for leerdoel in quark.leerdoelen %}
+            <option value="{{ leerdoel['id'] }}">
+              {{ leerdoel["leerdoel"] | capitalize }}
+            </option>
+            {% endfor %}
+            <option value="NULL">NULL</option>
+          </select>
+        </li>
+
+        <!-- Filter for faulty leerdoel -->
+        <li class="list-group-item">
+          <input
+            class="form-check-input me-1"
+            type="radio"
+            value="faulty-leerdoel-radio"
+            name="filter-radio"
+          />
+          Vragen met verkeerde leerdoelen
+        </li>
+
+        <!-- Filter for author -->
+        <li class="list-group-item">
+          <input
+            class="form-check-input me-1"
+            type="radio"
+            value="author-radio"
+            name="filter-radio"
+          />
+          Filter op auteur
+          <select name="filter-radio" id="author-filter">
+            {% for author in quark.authors %}
+            <option value="{{ author['id'] }}">
+              {{ author["voornaam"] | capitalize }} {{ author["achternaam"] |
+              capitalize }}
+            </option>
+            {% endfor %}
+            <option value="NULL">NULL</option>
+          </select>
+        </li>
+
+        <!-- Filter for faulty authors -->
+        <li class="list-group-item">
+          <input
+            class="form-check-input me-1"
+            type="radio"
+            value="faulty-author-radio"
+            name="filter-radio"
+          />
+          Vragen met niet bestaande auteur
+        </li>
+
+        <!-- Filter for internal employee -->
+        <li class="list-group-item">
+          <input
+            class="form-check-input me-1"
+            type="radio"
+            value="int-employee-radio"
+            name="filter-radio"
+          />
+          Door Test correct gemaakte vragen
+        </li>
+
+        <!-- Filter for external employee -->
+        <li class="list-group-item">
+          <input
+            class="form-check-input me-1"
+            type="radio"
+            value="ext-employee-radio"
+            name="filter-radio"
+          />
+          Door onderwijzer gemaakte vragen
+        </li>
+
+        <li class="list-group-item">
+          <strong>Filter op uitzonderingen in de database</strong>
+        </li>
+
+        <!-- Filter for vragen with leerdoel exception -->
+        <li class="list-group-item">
+          <input
+            class="form-check-input me-1"
+            type="radio"
+            value="leerdoel-exc-radio"
+            name="filter-radio"
+          />
+          Vragen met leerdoel uitzondering
+        </li>
+
+        <li class="list-group-item">
+          <input
+            class="form-check-input me-1"
+            type="radio"
+            value="sys-code-exc-radio"
+            name="filter-radio"
+          />
+          Vragen met system code uitzondering
+        </li>
+
+        <!-- Filter for questions with author exception -->
+        <li class="list-group-item">
+          <input
+            class="form-check-input me-1"
+            type="radio"
+            value="author-exc-radio"
+            name="filter-radio"
+          />
+          Vragen met auteur uitzondering
+        </li>
+        {% if session["admin"] %}
+        <!-- Filter for questions altered by users -->
+        <li class="list-group-item">
+          <strong>Filter op vragen veranderd door redacteur</strong>
+        </li>
+        <li class="list-group-item">
+          <input
+            class="form-check-input me-1"
+            type="radio"
+            value="changed-by-user"
+            name="filter-radio"
+          />
+          Gewijzigd door
+          <select name="filter-radio" id="leerdoel-filter">
+            {% for user in quark.users %}
+            <option value="{{ user['id'] }}">
+              {{ user["lastName"] | capitalize }}, {{ user["firstName"] |
+              capitalize }}
+            </option>
+            {% endfor %}
+            <option value="NULL">NULL</option>
+          </select>
+        </li>
+        <li class="list-group-item">
+          <input
+            class="form-check-input me-1"
+            type="radio"
+            value="exception-by-user"
+            name="filter-radio"
+          />
+          Uitgezonderd door
+          <select name="filter-radio" id="leerdoel-filter">
+            {% for user in quark.users %}
+            <option value="{{ user['id'] }}">
+              {{ user["lastName"] | capitalize }}, {{ user["firstName"] |
+              capitalize }}
+            </option>
+            {% endfor %}
+            <option value="NULL">NULL</option>
+          </select>
+        </li>
+        {% endif %}
+      </ul>
+      <input
+        type="submit"
+        class="btn btn-success filter-btn"
+        value="Filter de database"
+      />
+    </form>
+  </div>
+
+  <section class="data-table-section">
+    <table class="filter-table">
+      <thead>
+        <th>UID</th>
+        <th>Leerdoel</th>
+        <th>Auteur</th>
+        <th>Vraag</th>
+        <th>Gewijzigd door</th>
+        <th>Uitgezonderd door</th>
+      </thead>
+      {% for question in quark.question_table %}
+      <tr>
+        <td>
+          <a
+            class="btn btn-primary"
+            href="https://www.test-correct.nl/?vraag={{ question['id'] }}"
+            >{{ question["id"] }}</a
+          >
+        </td>
+        <td>
+          <p>
+            {% if question["leerdoel"] > quark.leerdoelen | length %} Onbekend
+            {% else %} {% for leerdoel in
+            quark.single_leerdoel[question["leerdoel"] - 1] %} {{ leerdoel |
+            capitalize }} {% endfor %} {% endif %}
+          </p>
+        </td>
+        <td>
+          <p>
+            {% if question["auteur"] > quark.authors | length %} Onbekend {%
+            else %} {% for author in quark.single_author[question["auteur"] - 1]
+            %} {{ author | capitalize }} {% endfor %} {% endif %}
+          </p>
+        </td>
+        <td>
+          <p>{{ question["vraag"] }}</p>
+        </td>
+        <td>
+          <p>
+            {% if not question["changedBy"] %} NVT {% else %} {{
+            question["changedBy"] }} {% endif %}
+          </p>
+        </td>
+        <td>
+          <p>
+            {% if not question["exceptionBy"] %} NVT {% else %} {{
+            question["exceptionBy"] }} {% endif %}
+          </p>
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+  </section>
+</div>
+
+{% include 'backbutton.html' %} {% endblock %}

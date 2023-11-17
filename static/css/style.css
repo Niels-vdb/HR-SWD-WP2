@@ -1,0 +1,642 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    /* border: 1px solid red; */
+}
+
+html {
+    font-size: 62.5%;
+  }
+
+body {
+    background-image: url(https://www.test-correct.nl/hubfs/Background-Triangles-grey-1.svg);
+    background-color: rgba(0,0,0,25%);
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 2.4rem;
+    line-height: 1.5;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* Nav Bar */
+.navbar {
+    z-index: 10;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Logoff button */
+.logoff-btn {
+    height: 40px;
+    width: 75px;
+    font-size: 1.5rem;
+
+}
+
+.dropdown-menu {
+    font-size: 1.5rem;
+    width: 250px;
+    color: black;
+    margin-right: 5px;
+}
+
+/* Back button */
+.back-btn {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    font-size: 1.5rem;
+}
+
+@media screen and (max-width: 450px) {
+    nav{
+        height: 60px;
+    }
+
+    .nav-image {
+        height: 40px;
+        width: 160px;
+    }
+}
+
+@media screen and (min-width: 2000px) {
+    nav{
+        height: 160px;
+    }
+
+    .nav-image {
+        height: 140px;
+        width: 585px;
+    }
+
+    .logoff-btn {
+    height: 95px;
+    width: 200px;
+    font-size: 4rem;
+    border-radius: 20px;
+    }
+
+    .back-btn {
+        height: 50%;
+        width: 50%;
+    }
+}
+
+/* Login Screen */
+.login-screen {
+    display: flex;
+    height: 87vh;
+    align-items: center;
+    justify-content: center;
+}
+
+.background-img {
+    opacity: 0.6;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.login-box {
+    height: 55%;
+    width: 35%;
+    border: 1px solid black;
+    border-radius: 15px;
+    background: white;
+    opacity: 0.9;
+    padding: 5px;
+}
+
+.login-header {
+    margin-top: 0;
+    margin-bottom: -1.5rem;
+}
+
+.form-signin {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    gap: 10px;
+}
+
+.form-control {
+    padding: 1rem;
+}
+
+.login-input {
+    border-radius: 10px;
+    padding: 5px;
+    border: 1px solid black;
+}
+
+.flash-message {
+    font-size: 1.2rem;
+    margin: 0;
+    color: red;
+}
+
+.login-btn {
+    padding: 1rem;
+    font-size: 2.1rem;
+}
+
+.login-heading {
+    font-size: 15px;
+}
+
+@media screen and (max-width: 375px) {
+    .login-box {
+        width: 70%;
+        height: 55%;
+    }
+}
+
+@media screen and (min-width: 375px) and (max-width: 760px) {
+    .login-box {
+        width: 60%;
+        height: 55%;
+    }
+}
+
+@media screen and (max-width: 850px) {
+    .login-box {
+        width: 50%;
+        height: 60%;
+    }
+}
+
+@media screen and (min-width: 1500px) {
+    .login-btn {
+        font-size: 3.6rem;
+    }
+
+    .login-header {
+        font-size: 6.2rem;
+    }
+
+    .form-control {
+        font-size: 3.3rem;
+        padding: 3rem;
+    }
+
+    .flash-message {
+        font-size: 2.3rem;
+    }
+}
+
+/* Menu Screen */
+
+.heading {
+    text-align: center;
+    font-weight: 700;
+    margin-bottom: 2rem;
+}
+
+.menu-greeting {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+.menu-heading {
+    margin: 1rem;
+}
+
+.menu-screen {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+}
+
+.grid-menu {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    grid-column-gap: 15px;
+    grid-row-gap: 15px;
+    justify-items: center;
+    margin-top: -2rem;
+}
+
+.box1 { grid-area: 1 / 1 / 2 / 2; }
+.box2 { grid-area: 1 / 2 / 2 / 3; }
+.box3 { grid-area: 2 / 1 / 3 / 2; }
+.box4 { grid-area: 2 / 2 / 3 / 3; }
+.box5 { grid-area: 3 / 1 / 4 / 2; }
+.box6 { grid-area: 3 / 2 / 4 / 3; }
+.box7 { grid-area: 4 / 1 / 5 / 2; }
+.box8 { grid-area: 4 / 2 / 5 / 3; }
+
+.box {
+    height: 60px;
+    width: 190px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 15px;
+    font-size: 1.5rem;
+}
+
+@media screen and (max-width: 330px) {
+    .heading {
+        margin-bottom: 2rem;
+        font-size: 1.4rem;
+    }
+
+    .grid-menu {
+        grid-column-gap: 0;
+        grid-row-gap: 1.7rem;
+    }
+
+    .box {
+        height: 100%;
+        width: 90%;
+        font-size: 1.2rem;
+    }
+}
+
+@media screen and (min-width: 330px) and (max-width: 450px) {
+    .menu-greeting {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        font-size: 3rem;
+    }
+
+    .heading {
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+    }
+
+    .grid-menu {
+        grid-column-gap: 0;
+        grid-row-gap: .6rem;
+    }
+
+    .box {
+        height: 85%;
+        width: 70%;
+        font-size: 1.3rem;
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1000px) {
+    .heading {
+        margin-bottom: 4rem;
+    }
+
+    .grid-menu {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+        grid-column-gap: 40px;
+        grid-row-gap: 25px;
+        justify-items: center;
+        width: 85%;
+    }
+    
+    .box1 { grid-area: 1 / 1 / 2 / 2; }
+    .box2 { grid-area: 1 / 2 / 2 / 3; }
+    .box3 { grid-area: 2 / 1 / 3 / 2; }
+    .box4 { grid-area: 2 / 2 / 3 / 3; }
+    .box5 { grid-area: 1 / 3 / 2 / 4; }
+    .box6 { grid-area: 2 / 3 / 3 / 4; }
+    .box7 { grid-area: 1 / 4 / 2 / 5; }
+    .box8 { grid-area: 2 / 4 / 3 / 5; }
+
+    .box {
+        height: 110%;
+        width: 110%;
+    }
+}
+
+@media screen and (min-width: 1400px) {
+    .grid-menu {
+        display: grid;
+        grid-column-gap: 0px;
+        grid-row-gap: 30px;
+        grid-column-gap: 40px;
+        grid-row-gap: 25px;
+        justify-items: center;
+        width: 85%;
+    }
+    
+    .box1 { grid-area: 1 / 1 / 2 / 2; }
+    .box2 { grid-area: 1 / 2 / 2 / 3; }
+    .box3 { grid-area: 2 / 1 / 3 / 2; }
+    .box4 { grid-area: 2 / 2 / 3 / 3; }
+    .box5 { grid-area: 1 / 3 / 2 / 4; }
+    .box6 { grid-area: 2 / 3 / 3 / 4; }
+    .box7 { grid-area: 1 / 4 / 2 / 5; }
+    .box8 { grid-area: 2 / 4 / 3 / 5; }
+
+
+    .box {
+        height: 95%;
+        width: 70%;
+        font-size: 2.4rem;
+    }
+}
+
+@media screen and (min-width: 2000px) {
+    .heading, .menu-heading {
+        font-size: 4rem;
+    }
+    .grid-menu {
+        grid-column-gap: 0px;
+        grid-row-gap: 35px;
+        height: 60vh;
+        width: 50%;
+    }
+    
+    .box {
+        height: 95%;
+        width: 70%;
+        font-size: 2.4rem;
+        border-radius: 30px;
+        font-size: 3.8rem;
+    }
+}
+
+/* Data Table */
+table,
+tr,
+td {
+    border: 1px solid black;
+    padding: 10px;
+    background: white;
+    font-size: 1.5rem;
+}
+
+/* Aanpassen Screen */
+.edit-screen {
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+}
+
+.edit-table {
+    width: 70%;
+    height: 300px;
+    overflow: scroll;
+}
+
+.edit-table-c-1 {
+    width: 75px;
+}
+
+.leerdoel-options,
+.author-options {
+    padding: 5px;
+    font-size: 1.5rem;
+}
+
+.edit-select {
+    height: 200px;
+    margin-bottom: 5px;
+}
+
+.leerdoel-container,
+.author-container,
+.sys-code-container {
+    width: 250px;
+    height: 353px;
+    justify-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.sys-code-edit-textarea {
+    width: 100%;
+    height: 80%;
+}
+
+.sys-code-container {
+    margin-top: 203px;
+    height: 150px;
+}
+
+.edit-question-id {
+    width: 75px;
+    
+}
+
+.edit-question-author, .edit-question-leerdoel{
+    width: 75px;
+}
+
+.edit-btn {
+    width: 100%;
+    font-size: 1.5rem;
+}
+
+.system-codes-btns {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 1.5rem;
+}
+
+.sys-code-id:hover {
+    color: black;
+}
+
+/* Switch buttons */
+.edit-question-btns {
+    height: 25px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    position: absolute;
+    bottom: 17vh;
+}
+
+.switch-btn {
+    width: 300px;
+    height: 60px;
+    padding: 5px;
+    border-radius: 10px;
+    font-size: 1.5rem;
+}
+
+
+/* Filter screen */
+.filter-screen {
+    width: 100%;
+    height: 505px;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    padding: 10px;
+}
+/* Container with filter options */
+.filters-box {
+    max-height: 600px;
+    width: 30%;
+    overflow: scroll;
+}
+
+ .list-group {
+    padding-left: 0;
+    font-size: 1.5rem;
+}
+
+.filter-btn {
+    width: 100%;
+    font-size: 1.5rem;
+}
+
+/* Filter table */
+.data-table-section {
+    width: 70%;
+    height: 450px;
+    overflow: scroll;
+}
+
+.filter-table {
+    height: 400px;
+    margin-left: 10px;  
+}
+
+/* Filtered data screen */
+.filtered-screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    padding: 10px;
+}
+
+.filtered-data-table {
+    height: 400px;
+    overflow: scroll;
+}
+
+.filtered-btns {
+    position: absolute;
+    left: 40%;
+    bottom: 5%;
+    width: 350px;
+    display: flex;
+    justify-content: center;
+}
+
+.filtered-btn {
+    font-size: 1.5rem;
+}
+
+.uid-input {
+    width: 75px;
+}
+
+/* New user Screen */
+.new-user-screen {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    height: 83vh;
+    font-size: 1.5rem;
+}
+
+.new-user-form {
+    width: 325px;
+    border: 1px solid black;
+    border-radius: 15px;
+    background-color: white;
+    padding: 10px;
+
+}
+
+.new-user-btn {
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 0;
+    font-size: 1.5rem;
+
+}
+
+.new-user-password {
+    margin-bottom: 0;
+}
+
+/* Edit author screen */
+
+.edit-author-screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.edit-author-table {
+    margin-top: 40px;
+    height: 200px;
+    width: 900px;
+}
+
+.edit-author-btns {
+    display: flex;
+    justify-content: space-evenly;
+    gap: 15px;
+    width: 900px;
+    margin-top: 40px;
+    margin-left: 50px;
+}
+
+.author-btn {
+    width: 250px;
+    font-size: 1.5rem;
+}
+
+.birth-year-input {
+    display: flex;
+    flex-direction: row;
+    margin-right: 20px;
+}
+
+.new-birth-year {
+    width: 125px;
+    margin-right: 25px;
+}
+
+/* All users screen */
+.see-users-screen {
+    height: 450px;
+    overflow: scroll;
+    display: flex;
+    justify-content: center;
+}
+
+.user-table {
+    width: 75%;
+    margin: 20px 120px;
+    height: 250px;
+    overflow: scroll;
+}
+
+.user-table-delete-row {
+    text-align: center;
+}
+
+/* Exception screen */
+.exeption-screen {
+    height: 450px;
+    overflow: scroll;
+    display: flex;
+    justify-content: center;
+}
+
+#exception-table {
+    margin: 30px;
+    width: 90%;
+}
